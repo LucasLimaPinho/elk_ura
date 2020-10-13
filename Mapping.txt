@@ -1,0 +1,25 @@
+# Mapping determina a estrutura dos documentos (e.g fields and their data types)
+
+# Similar a SCHEMAS em relational databases.
+
+# Explicit mapping: we define fields and their data types by ourselves
+
+# Dynamic mapping: Elasticsearch generates field mapping for us
+
+# Nested Data Type ----> Similar to the object data type, but maintain object relationships.
+# Useful when indexing arrays of objects.
+# Must use the nested query.
+
+
+# Keywork Data Type ----> Used for exact matching values. Typically used for filtering, aggregating and sorting
+
+# The keyword analyzer is a no-op analyzer. 
+
+# A string se mantém não modificada justamente pelo fato de keywork buscar exact matching
+
+POST /_analyze
+{
+  "text": "2 guys walk into    a bar, but the third... DUCKS :-)",
+  "analyzer": "keyword"
+  
+}
