@@ -19,3 +19,26 @@ POST /_analyze
   "filter": ["lowercase"]
 }
 ```
+
+POST /_analyze
+{
+  "text": "2 guys walk into    a bar, but the third... DUCKS :-)",
+  "analyzer": "standard"
+  
+}
+
+POST /_analyze
+{
+  "text": "2 guys walk into   a bar, but the third... DUCKS! :-)",
+  "char_filter": [],
+  "tokenizer": "standard",
+  "filter": ["lowercase"]
+}
+
+POST /_analyze
+{
+  "text": "2 guys walk into   a bar, but the third... DUCKS! :-)",
+  "char_filter": [],
+  "tokenizer": "standard",
+  "filter": ["uppercase"]
+}
