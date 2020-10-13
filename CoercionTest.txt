@@ -3,10 +3,16 @@ PUT /coercion_test/_doc/1
   "price": 7.4
 }
 
+# Primeiro ElasticSearch já fez o dynamic mapping dizendo que o type de "price" é float.
+# Aqui em /coercion_test/_doc/2 ele é capaz de converter o valor de string para float.
+
 PUT /coercion_test/_doc/2
 {
   "price": "7.4"
 }
+
+# Aqui ele não consegue converter o valor de string para float.
+
 
 PUT /coercion_test/_doc/3
 {
