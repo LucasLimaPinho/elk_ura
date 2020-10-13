@@ -19,5 +19,13 @@ PUT /coercion_test/_doc/3
   "price": "7.4m"
 }
 
+# Aqui ainda teremos o valor de "7.4" como string para o valor retornado no objeto _source.
+# Porém, ElasticSearch não utiliza o objeto _source para realizar suas buscar
+# Elasticsearch utiliza seus data structures de Apache Lucene para realizar as buscar
+# _source does not reflect how documents are indexed.
+
+######## BKD Trees
+######## Inverted Indices
+
 
 GET /coercion_test/_doc/2
