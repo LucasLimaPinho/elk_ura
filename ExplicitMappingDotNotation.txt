@@ -16,7 +16,34 @@ PUT /reviews
   }
 }
 
+PUT /reviews_dot_notation
+{
+  "mappings": {
+    "properties": {
+      "rating": { "type": "float"},
+      "content": { "type": "text"},
+      "product_id": { "type": "integer"},
+      "author.first_name": { "type": "text"},
+      "author.last_name": { "type": "text"},
+      "author.email": { "type": "keyword"}
+      
+    }
+  }
+}
+
 PUT /reviews/_doc/1
+{
+  "rating": 5.0,
+  "content": "Outstanding course!",
+  "product_id": 123,
+  "author":{
+    "first name": "Lucas",
+    "last name": "Pinho",
+    "email": "lucaslima@dataengineering.com"
+  }
+}
+
+PUT /reviews_dot_notation/_doc/1
 {
   "rating": 5.0,
   "content": "Outstanding course!",
