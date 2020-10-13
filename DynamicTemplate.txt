@@ -1,0 +1,71 @@
+# Dynamic Templates
+
+PUT /dynamic_template_test
+{
+  "mappings": {
+    "dynamic_templates": [
+      {
+        "integers": {
+# Dynamic Templates
+
+PUT /dynamic_template_test
+{
+  "mappings": {
+    "dynamic_templates": [
+      {
+        "integers": {
+          "match_mapping_type": "long",
+          "mapping": {
+            "type": "integer"
+          }
+        }
+      }
+    ]
+  }
+}
+
+# By default, isso seria mapeado como um LONG field.
+
+# Com dynamic template, veremos que será mapeado para um integer.
+
+POST /dynamic_template_test/_doc
+{
+  "in_stock": 123
+}
+
+GET /dynamic_template_test/_doc/A0PNI3UBELyn9RdFQ_Bh
+
+GET /dynamic_template_test
+
+GET /dynamic_template_test/_mapping
+
+# Exemplo para dynamic template de um tipo text - por exemplo mudar o parâmetro ignore above
+
+PUT /dynamic_template_text
+{
+  "mappings": {
+    "dynamic_templates" : [
+      {
+      "strings": {
+        "match_mapping_type": "string",
+        "mapping": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 512
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+
+POST /dynamic_template_text/_doc
+{
+  "name": "Lucas Lima Reis de Pinho"
+}
+
+GET /dynamic_template_text/_mapping
