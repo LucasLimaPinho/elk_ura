@@ -1,0 +1,64 @@
+# Update By Query.
+
+# Update multiple documents with one query.
+
+# Similar to UPDATE com WHERE clause em Relational Databases.
+
+# Running this script for all documents porque estamos usando
+# a query "match_all"
+
+POST /products/_doc/102
+{
+  
+    "name": "Airfrier",
+    "price": 299,
+    "in_stock": 10
+  
+}
+
+POST /products/_doc/103
+{
+  
+    "name": "Sanduicheira",
+    "price": 299,
+    "in_stock": 5
+  
+}
+
+POST /products/_doc/104
+{
+  
+    "name": "Geladeira",
+    "price": 299,
+    "in_stock": 3
+  
+}
+
+
+# Get all documents in a index.
+
+GET /products/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+POST /products/_update_by_query
+{
+  "script":{
+    "source": "ctx._source.in_stock--"
+  },
+  "query": {
+    "match_all": {}
+  }
+}
+
+# Get all documents in a index. Todos estarão com um valor de in_stock com 1 a menos agora
+
+GET /products/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
