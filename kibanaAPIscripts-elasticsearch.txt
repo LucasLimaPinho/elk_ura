@@ -1,0 +1,103 @@
+DELETE /pages
+DELETE /products
+
+PUT /products
+{
+  "settings":{
+    
+    "number_of_shards": 2
+    , "number_of_replicas": 2
+    
+  }
+}
+
+GET /_cat/indices?v
+
+GET /_cat/shards?v
+
+GET /_cluster/health
+
+GET /_cat/nodes?v
+
+POST /products/_doc
+{
+  "name": "Coffe Maker",
+  "price": 64,
+  "in_stock": 10
+}
+
+PUT /products/_doc/100
+{
+  "name": "Toaster",
+  "price": 49,
+  "in_stock": 4
+}
+
+GET /products/_doc/KUMaH3UBELyn9RdF6tce
+
+GET /products/_doc/100
+
+POST /products/_update/100
+{
+  "doc":{
+    "in_stock":2
+  }
+}
+
+GET /products/_doc/100
+
+POST /products/_update/100
+{
+  "doc":{
+    "tags":["electronics", "football"]
+  }
+}
+
+POST /products/_update/100
+{
+  "script": {
+    "source":"ctx._source.in_stock--"
+  }
+}
+
+GET /products/_doc/100
+
+POST /products/_update/100
+{
+  "script": {
+    "source":"ctx._source.in_stock=10"
+  }
+}
+
+GET /products/_doc/100
+
+POST /products/_update/100
+{
+  "script": {
+    "source":"ctx._source.in_stock -=params.quantity",
+    "params": {
+      "quantity": 4
+    }
+  }
+}
+
+#Scripted Updates
+
+GET /products/_doc/100
+
+POST /products/_update/100
+{
+  "script": {
+    "source": """
+      if (ctx._source.in_stock == 0) {
+        ctx.op = 'noop';
+        
+      }
+      
+      ctx._source.in_stock--;
+      
+      """
+  }
+}
+
+GET /products/_doc/100
