@@ -1,0 +1,45 @@
+## Dynamic Mapping
+
+# Seting dynamic mapping to false makes new field be IGNORED but not REJECTED
+# The new fields are still part of the object _source
+# No inverted index is created for the last_name in the example below
+# Querying field will give no result
+
+PUT /people
+{
+  
+  "mappings": {
+    "dynamic": false,
+    "properties": {
+      "first_name": { "type": "text" }
+    }
+  }
+}
+
+POST /people/_doc
+{
+  "first_name": "Lucas",
+  "last_name": "Pinho"
+}
+
+# Query traz resultado. last_name ainda faz parte do objeto _source, mas não do inverted index utilizado pelo Apache Lucene.
+
+GET /people/_search
+{
+  "query": {
+    "match": {
+      "first_name": "Lucas"
+    }
+  }
+}
+
+
+# QUery não traz resultado
+GET /people/_search
+{
+  "query": {
+    "match": {
+      "last_name": "Pinho"
+    }
+  }
+}
