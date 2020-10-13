@@ -1,0 +1,14 @@
+### Elastic Common Schema (ECS)
+
+# A specification of common fields and how they should be mapped
+# Before ECS, there was no cohesion between field names
+# Ingesting logs from nginx would give different names than Apache
+# ECS means that common fields are named the same thing
+
+#       * E.g @timestamp
+
+# In ECS, documents are referred as EVENTS
+
+# Monstly used for standard events - webserver logs, OS metrics, geospatial data.
+# You should try to standard your data strucures with ECS.
+
