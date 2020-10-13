@@ -1,0 +1,28 @@
+# The Bulk API expects data formatted using the NDJSON specification
+
+# Indexar em batch processing
+
+# A failed action will not afect other actions
+# The Bulk API returns detailed information about each action
+
+POST /_bulk
+{ "index":{"_index": "products", "_id": 200}}
+{"name": "Espresso Machine", "price": 199, "in_stock":5 }
+{ "create": {"_index": "products", "_id": 201}}
+{"name": "Liquidificador", "price": 300, "in_stock":9}
+
+GET /products/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+POST /_bulk
+{ "update": { "_index": "products", "_id": 201 } }
+{ "doc": {"price": 129} }
+{ "delete": { "_index": "products", "_id": 200} }
+
+POST /products/_bulk
+{ "update": {"_id": 201 } }
+{ "doc": {"price": 150} }

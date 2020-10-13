@@ -4,3 +4,11 @@ POST /products/_delete_by_query
     "match_all": {}
   }
 }
+
+
+GET /products/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
