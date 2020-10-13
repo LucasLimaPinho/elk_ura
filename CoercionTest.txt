@@ -1,0 +1,17 @@
+PUT /coercion_test/_doc/1
+{
+  "price": 7.4
+}
+
+PUT /coercion_test/_doc/2
+{
+  "price": "7.4"
+}
+
+PUT /coercion_test/_doc/3
+{
+  "price": "7.4m"
+}
+
+
+GET /coercion_test/_doc/2
