@@ -1,0 +1,29 @@
+PUT /reviews
+{
+  "mappings": {
+    "properties": {
+      "rating": { "type": "float"},
+      "content": { "type": "text"},
+      "product_id": { "type": "integer"},
+      "author": {
+        "properties": {
+          "first name": {"type": "text"},
+          "last name": { "type": "text"},
+          "email": {"type": "keyword"}
+        }
+      }
+    }
+  }
+}
+
+PUT /reviews/_doc/1
+{
+  "rating": 5.0,
+  "content": "Outstanding course!",
+  "product_id": 123,
+  "author":{
+    "first name": "Lucas",
+    "last name": "Pinho",
+    "email": "lucaslima@dataengineering.com"
+  }
+}
