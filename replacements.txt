@@ -1,0 +1,8 @@
+PUT /products/_doc/100
+{
+  "name": "Toaster",
+  "price": 700,
+  "in_stock":3
+}
+
+GET /products/_doc/100
