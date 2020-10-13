@@ -1,3 +1,14 @@
+# Values for a text field are analyzed and the results are stored within an INVERTED index
+# Each field has a dedicated inverted index
+# An inverted index is a mapping between terms and which documents contain them
+# Terms are sorted alphabeticcaly for performance reasons
+# Inverted indices are created and maintaned by Apache Lucene, not ElasticSearch.
+# Inverted indices enables fast searches
+# BKD Trees são outras estruturas de dados para otimizar performance de queries quando não são text type
+# BKD Trees: numeric values, dates, geospatial data
+
+# Inverted Indices são importantes para responder perguntas do tipo "Quais são os documentos que possuem o termo "bola"?"
+
 # Using the Analyze API
 
 ## Analyzing a string with the `standard` analyzer
