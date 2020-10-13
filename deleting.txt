@@ -1,0 +1,8 @@
+GET /products/_doc/100
+
+GET /products/_doc/101
+
+DELETE /products/_doc/100
+
+GET /products/_doc/100
+
