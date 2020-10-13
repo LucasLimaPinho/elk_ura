@@ -1,0 +1,15 @@
+DELETE /products/_doc/101
+
+POST /products/_update/101
+{
+  "script": {
+    "source": "ctx._source.in_stock++"
+  },
+  "upsert":{
+    "name": "Blender",
+    "price": 280,
+    "in_stock": 5
+  }
+}
+
+GET /products/_doc/101
