@@ -1,0 +1,11 @@
+GET /orders/_search
+{
+  "size": 0,
+  "aggs": {
+    "stats_agg": {
+      "stats": {
+        "field": "total_amount"
+      }
+    }
+  }
+}
