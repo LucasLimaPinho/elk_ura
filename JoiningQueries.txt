@@ -1,0 +1,108 @@
+DELETE /department
+PUT /department
+{
+  "mappings": {
+    "properties": {
+      "join_field": {
+        "type": "join",
+        "relations": {
+          "department": "employee"
+        }
+      }
+    }
+  }
+}
+
+PUT /department/_doc/1
+{
+  "name": "Development",
+  "join_field": {
+    "name": "department"
+  }
+}
+
+# "join_field": "department" fala para o ElasticSearch que este documento é um departamento e irá estabelecer as relações parent-child com department/employee.
+# O próximo documento a ser adicionado será de um employee e você irá observar que o "join_field" recebe o name de "employee"
+PUT /department/_doc/2
+{
+  "name": "Marketing",
+  "join_field": {
+    "name": "department"
+  }
+}
+
+GET /department/_mapping
+
+# "name": "employee" dentro do objeto "join_field" fala para o Elasticsearch que este documento é um empoloyee e estabelece a relação parent-child com o departamento.
+
+# "parent": 1 determina que ele faz parte do departamento Development que é um documento setado como do tipo Department e que possui o id igual a 1
+
+# ?routing=1 faz com o employee e o parent sejam roteados para o mesmo shard.
+# sem o ?routing, vamos ter um erro ao tentar adicionar o documento com join_field.
+# Routing é uma forma de Elasticsearch saber qual shard um documento com certo ID deve ser adicionado.
+
+PUT /department/_doc/3?routing=1
+{
+  "name": "Lucas Pinho",
+  "age": 29,
+  "gender": "M",
+  "join_field": {
+    "name": "employee",
+    "parent": 1
+  }
+}
+
+PUT /department/_doc/4?routing=2
+{
+  "name": "John Doe",
+  "age": 4,
+  "gender": "F",
+  "join_field": {
+    "name": "employee",
+    "parent": 2
+  }
+}
+
+PUT /department/_doc/5?routing=1
+{
+  "name": "James Evans",
+  "age": 32,
+  "gender": "M",
+  "join_field": {
+    "name": "employee",
+    "parent": 1
+  }
+}
+
+PUT /department/_doc/6?routing=1
+{
+  "name": "Daniel Harris",
+  "age": 52,
+  "gender": "M",
+  "join_field": {
+    "name": "employee",
+    "parent": 1
+  }
+}
+
+PUT /department/_doc/7?routing=2
+{
+  "name": "Jane Park",
+  "age": 23,
+  "gender": "F",
+  "join_field": {
+    "name": "employee",
+    "parent": 2
+  }
+}
+
+PUT /department/_doc/8?routing=1
+{
+  "name": "Christina Parker",
+  "age": 29,
+  "gender": "F",
+  "join_field": {
+    "name": "employee",
+    "parent": 1
+  }
+}
