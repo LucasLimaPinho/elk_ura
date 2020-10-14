@@ -14,6 +14,22 @@ GET /recipes/_search
             }
           }
         }
+GET /recipes/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {"match": {
+          "ingredients.name": "parmesan"
+          }
+        },
+        {
+          "range": {
+            "preparation_time_minutes": {
+              "lte": 15
+            }
+          }
+        }
       ]
     }
   }
@@ -32,6 +48,43 @@ GET /recipes/_search
         "must_not": [
         {"match": {
           "ingredients.name": "tuna"
+            }
+          }
+        ], 
+        "filter": [
+          {"range": {
+            "preparation_time_minutes": {
+              "lte": 15
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+# Should faz aumentar o score para determinado campo que você deseja
+# A receita sem parsley terá um score menor.
+
+GET /recipes/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {"match": {
+          "ingredients.name": "parmesan"
+            }
+          }
+        ],
+        "must_not": [
+        {"match": {
+          "ingredients.name": "tuna"
+            }
+          }
+        ],
+        "should": [
+          {"match": {
+          "ingredients.name": "parsley"
             }
           }
         ], 
