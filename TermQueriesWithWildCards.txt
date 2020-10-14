@@ -1,0 +1,26 @@
+GET /products/_search 
+{
+  "query": {
+    "wildcard": {
+      "tags.keyword": "Veg*ble"
+    }
+  }
+}
+
+GET /products/_search 
+{
+  "query": {
+    "wildcard": {
+      "tags.keyword": "Veg?ble"
+    }
+  }
+}
+
+GET /products/_search 
+{
+  "query": {
+    "wildcard": {
+      "tags.keyword": "Veget?ble"
+    }
+  }
+}
