@@ -9,7 +9,8 @@ GET /orders/_search
   "aggs": {
     "status_terms": {
       "terms": {
-        "field": "status.keyword"
+        "field": "status.keyword",
+        "missing": "N/A"
       }
     }
   }
