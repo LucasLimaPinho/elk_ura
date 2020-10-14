@@ -2,6 +2,9 @@
 # Diferentemente das Metrics Aggregations que calculam números (min, max, avg, sum), as buckets aggregations apenas irão juntar documentos em conjuntos.
 
 # TERMS é uma bucket aggregation.
+# Order irá colocar em ordem alfabética os buckets gerados.
+# missing seta qual será o bucket para documentos que não possuam o field status
+# min_doc_count é o parâmetro que seta o valor mínimo para que um bucket possa aparecer na resposta. Setamos em 0 para que N/A pudesse aparecer.
 
 GET /orders/_search
 {
@@ -11,7 +14,10 @@ GET /orders/_search
       "terms": {
         "field": "status.keyword",
         "missing": "N/A",
-        "min_doc_count": 0
+        "min_doc_count": 0,
+        "order": {
+          "_key": "asc"
+        }
       }
     }
   }
