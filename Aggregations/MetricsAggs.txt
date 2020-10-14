@@ -1,0 +1,41 @@
+# total_sales é o nome da sua agregação definido aleatoriamente - a sua escolha.
+# Assim como avg_sales, max_sale, min_sale.
+
+GET /orders/_search
+{
+  "size": 0,
+  "aggs": {
+    "total_sales": {
+      "sum": {
+        "field": "total_amount"
+      }
+    },
+    "avg_sales": {
+      "avg": {
+        "field": "total_amount"
+      }
+    },
+    "min_sale": {
+      "min": {
+        "field": "total_amount"
+      }
+    },
+    "max_sale": {
+      "max": {
+        "field": "total_amount"
+      }
+    }
+  }
+}
+
+GET /orders/_search
+{
+  "size": 0,
+  "aggs": {
+    "avg_sales": {
+      "avg": {
+        "field": "total_amount"
+      }
+    }
+  }
+}

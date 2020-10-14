@@ -1,0 +1,14 @@
+
+# Cardinality Aggregation -> vai mostrar que existem 100 diferentes vendedores.
+
+GET /orders/_search
+{
+  "size": 0,
+  "aggs": {
+    "total_salesman": {
+      "cardinality": {
+        "field": "salesman.id"
+      }
+    }
+  }
+}
