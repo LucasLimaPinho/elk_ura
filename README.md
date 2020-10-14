@@ -58,6 +58,10 @@ https://www.udemy.com/course/elasticsearch-complete-guide
 2. Bucket Aggregations - cria conjuntos para coletar os documentos. Terms é um tipo de aggregation utilizado para realizar Bucket Aggregation.
 3. Utilizar parâmetro Missing para determinar o nome do bucket para documentos que não possuam o field utilizado para agregagação de terms.
 4. value_count é a agregação utilizada para retornar o número de documentos. **Eles são uma aproximação devido performance issues**.
+5. Counts are not always accurate devido a natureza distribuída do Elasticsearch com suas réplicas, shards e nodes. One index is distributed across multiple shards. Esta acurácia é muito modulada pelo parâmetro "size" da agregação "terms" -> É um tradeoff, quanto maior o size, maior sua acurácia, mas pior sua performance em relação a query. O valor default é 10.
+6. doc_count_error_upper_bound -> esta key representa o máximo número de contagem de um termo que não foi parte do resultado final (uma métrica de quanto a contagem de documentos teve acurácia). Ele provê uma margem de erro. Na maioria dos cenários, a inacurácia do document count não será um problema mantendo o valor default de 10 para size como key do objeto "terms";
+
+
 
 
 
