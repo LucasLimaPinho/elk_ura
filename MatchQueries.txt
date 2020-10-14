@@ -1,0 +1,54 @@
+
+# Match queries are analyzed and make full-text searchs.
+# Existem hits porque temos títulos que possuem os termos na query
+
+GET /recipes/_search 
+{
+  "query": {
+    "match": {
+      "title": "Recipe with pasta or spaghetti"
+    }
+  }
+}
+
+# Operador by default é "or". Mudando para "and", ele busca que o title possua todos os termos da query
+# 0 hits porque não existe title que tenha TODOS os termos
+
+GET /recipes/_search 
+{
+  "query": {
+    "match": {
+      "title":{
+        "query": "Recipe with pasta or spaghetti",
+        "operator": "and"
+      }
+    }
+  }
+}
+
+# Ocorrem hits porque está buscando títulos que possua os termos pasta e spaghetti simultaneamente
+
+GET /recipes/_search 
+{
+  "query": {
+    "match": {
+      "title":{
+        "query": "pasta or spaghetti",
+        "operator": "and"
+      }
+    }
+  }
+}
+
+# Tirando OR é importante observar que match queries passam por ANALYZER. então OR é cancelado
+GET /recipes/_search 
+{
+  "query": {
+    "match": {
+      "title":{
+        "query": "pasta spaghetti",
+        "operator": "and"
+      }
+    }
+  }
+}
