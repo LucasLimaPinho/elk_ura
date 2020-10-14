@@ -1,5 +1,6 @@
 https://www.udemy.com/course/elasticsearch-complete-guide
 
+# Mapping Recomendations
 
 1. Dynamic mapping is convenient, but not a good idea in production - use explicit mappings;
 2. Save disk space with more optimized mappings when storing many documents;
@@ -17,7 +18,9 @@ https://www.udemy.com/course/elasticsearch-complete-guide
 11. This rules are probably not worth for less than 1 million documents - rule of thumb;
 12. Worst case scenario: you'll need to perform reindexing;
 
+# Queries
 
+1. The query request lands on the COORDINATING NODE of a cluster.
 
 
 
