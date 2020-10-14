@@ -1,0 +1,65 @@
+# Filter source -> response
+
+GET /recipes/_search 
+{
+  "_source": false, 
+  "query": {
+    "match": {
+      "title": "pasta"
+    }
+  }
+}
+
+GET /recipes/_search 
+{
+  "_source": "created", 
+  "query": {
+    "match": {
+      "title": "pasta"
+    }
+  }
+}
+
+GET /recipes/_search 
+{
+  "_source": "ingredients.name", 
+  "query": {
+    "match": {
+      "title": "pasta"
+    }
+  }
+}
+
+GET /recipes/_search 
+{
+  "_source": "ingredients.*", 
+  "query": {
+    "match": {
+      "title": "pasta"
+    }
+  }
+}
+
+GET /recipes/_search 
+{
+  "_source": ["ingredients.*", "servings"], 
+  "query": {
+    "match": {
+      "title": "pasta"
+    }
+  }
+}
+
+
+GET /recipes/_search
+{
+  "_source": {
+    "includes": "ingredients.*",
+    "excludes": "ingredients.name"
+  },
+  "query": {
+    "match": {
+      "title": "pasta"
+    }
+  }
+}
