@@ -1,7 +1,7 @@
 https://www.udemy.com/course/elasticsearch-complete-guide
 
 
-1. Dynamic mapping is conveniente, but not a good idea in production - use explicit mappings;
+1. Dynamic mapping is convenient, but not a good idea in production - use explicit mappings;
 2. Save disk space with more optimized mappings when storing many documents;
 3. Set dynamic to "strict", not false -> avoid surprises and unexpected results; YOU ARE ALWAYS IN CONTROL OF YOUR DOCUMENTS FIELDS.
 4. Don't always map text fields as both text and keywords - typically only one is needed; Each mapping requires disk space;
