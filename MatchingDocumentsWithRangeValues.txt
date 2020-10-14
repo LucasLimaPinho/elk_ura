@@ -12,3 +12,17 @@ GET /products/_search
     }
   }
 }
+
+# Também serve para dates.
+
+GET /products/_search
+{
+  "query": {
+    "range": {
+      "created": {
+        "gte": "2010/01/01",
+        "lte": "2010/12/31"
+      }
+    }
+  }
+}
