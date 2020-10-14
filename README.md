@@ -22,11 +22,14 @@ https://www.udemy.com/course/elasticsearch-complete-guide
 
 # Queries
 
-1. The query request lands on the COORDINATING NODE of a cluster;
+1. The query request lands on the **COORDINATING NODE** of a cluster;
 2. By default, every node in the cluster may act as a coordinating node and may receive HTTP requests;
 3. The coordinating node broadcasts the query to other nodes (shards or replicas) and then receive their results, merge them together and send them back to the client;
-4. By default, the first ten results are explicit in HITS;
-5. Each result has a field _score that says how well the matching record fits the query;
+4. By default, the first **ten** results are explicit in HITS;
+5. Each result has a field _score that says how well the matching record fits the query; By default, the matching records are sorted by their relevance score;
+
+
+
 
 
 
