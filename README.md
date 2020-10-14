@@ -52,6 +52,12 @@ https://www.udemy.com/course/elasticsearch-complete-guide
 24. Denormalize data instead of mapping document relationships. This is almost always the best approach. - **Join Field Performance Considerations**
 25. Filters save computation time when we don't need to calculate relevance scores.
 
+# Aggregations
+
+1. Metrics Aggregations - use Stats aggregations for min, max, avg, sum.
+2. Bucket Aggregations - cria conjuntos para coletar os documentos. Terms é um tipo de aggregation utilizado para realizar Bucket Aggregation.
+3. Utilizar parâmetro Missing para determinar o nome do bucket para documentos que não possuam o field utilizado para agregagação de terms.
+4. value_count é a agregação utilizada para retornar o número de documentos. **Eles são uma aproximação devido performance issues**.
 
 
 
