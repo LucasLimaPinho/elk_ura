@@ -1,0 +1,30 @@
+# "2010/01/01" ---> ANCHOR DATE
+# Agora devemos encontrar produtos criados em 2015.
+# || em dates é utilizado para date math
+
+
+GET /products/_search
+{
+  "query": {
+    "range": {
+      "created": {
+        "gte": "2016/01/01||-1y"
+        
+      }
+    }
+  }
+}
+
+# Subtrair 1 ano e 1 dia.
+
+GET /products/_search
+{
+  "query": {
+    "range": {
+      "created": {
+        "gte": "2016/01/01||-1y-1d"
+        
+      }
+    }
+  }
+}

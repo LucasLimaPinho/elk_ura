@@ -26,3 +26,31 @@ GET /products/_search
     }
   }
 }
+
+# Usando NOW
+
+GET /products/_search
+{
+  "query": {
+    "range": {
+      "created": {
+        "gte": "now-5y-1d"
+        
+      }
+    }
+  }
+}
+
+# Usando NOW
+
+GET /products/_search
+{
+  "query": {
+    "range": {
+      "created": {
+        "gte": "now-5y-1d/M"
+        
+      }
+    }
+  }
+}
