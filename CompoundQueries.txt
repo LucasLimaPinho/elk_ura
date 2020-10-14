@@ -1,0 +1,48 @@
+GET /recipes/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {"match": {
+          "ingredients.name": "parmesan"
+          }
+        },
+        {
+          "range": {
+            "preparation_time_minutes": {
+              "lte": 15
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+GET /recipes/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {"match": {
+          "ingredients.name": "parmesan"
+            }
+          }
+        ],
+        "must_not": [
+        {"match": {
+          "ingredients.name": "tuna"
+            }
+          }
+        ], 
+        "filter": [
+          {"range": {
+            "preparation_time_minutes": {
+              "lte": 15
+            }
+          }
+        }
+      ]
+    }
+  }
+}
