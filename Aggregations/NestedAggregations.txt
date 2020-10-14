@@ -1,0 +1,61 @@
+# Nested Aggregations -> we can use the Bucket Aggregations for other aggregations.
+# We can even nest bucket aggregation with bucket aggregations.
+# Uma coisa importante é fazer o nest de stats aggregations dentro dos buckets criados pelas bucket aggregations - principalmente utilizada pelo objeto TERMS.
+
+GET /orders/_search
+{
+  "size": 0,
+  "aggs": {
+    "status_terms": {
+      "terms": {
+        "field": "status.keyword",
+        "min_doc_count": 1,
+        "missing": "N/A", 
+        "order": {
+          "_key": "asc"
+        }
+      },
+      "aggs": {
+        "stats_nested": {
+          "stats": {
+            "field": "total_amount"
+          }
+        }
+      }
+    }
+  }
+}
+
+# Reduzindo os buckets criados como uma condição sobre os valores de total_amount em que a bucket_aggregation vai atuar.
+
+
+GET /orders/_search
+{
+  "size": 0,
+  "query": {
+    "range": {
+      "total_amount": {
+        "gte": 100
+      }
+    }
+  }, 
+  "aggs": {
+    "status_terms": {
+      "terms": {
+        "field": "status.keyword",
+        "min_doc_count": 1,
+        "missing": "N/A", 
+        "order": {
+          "_key": "asc"
+        }
+      },
+      "aggs": {
+        "stats_nested": {
+          "stats": {
+            "field": "total_amount"
+          }
+        }
+      }
+    }
+  }
+}
