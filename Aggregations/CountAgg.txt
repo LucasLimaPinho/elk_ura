@@ -1,0 +1,12 @@
+#COUNT
+GET /orders/_search
+{
+  "size": 0,
+  "aggs": {
+    "values_count": {
+      "value_count": {
+        "field": "total_amount"
+      }
+    }
+  }
+}
