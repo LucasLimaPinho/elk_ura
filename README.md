@@ -41,6 +41,16 @@ https://www.udemy.com/course/elasticsearch-complete-guide
 13. In Elasticsearch, you **denormalize** your data whenever possible because it leads to better performance. Kind of the opposite that what you would do on a Relational Database. Performance > disk space here.
 14. Queries em elementes do tipo "nested" precisam incluir o objeto "nested" na query. Settando _source=false e expondo os inner_hits, podemos obter somente os resultados da query de nested objects sem retornar todo o documento;
 15. Routing é uma forma de Elasticsearch saber qual shard um documento com certo ID deve ser adicionado. É necessário adicionar ?routing no momento de adição de documentos com relação parent-child com join_field. "name" dentro de um objeto "join_field" seta qual tipo de documento temos e "parent" irá determinar quem é o pai em uma relação de parent-child. The default routing behaviour é usar o id do documento como valor de routing e alimentar isto para uma hashing function. Precisamos sempre adicionar um query parameter "routing" com matching ID do parent para que a inserção de documentos ocorra de forma successfull. **Parent and child documents devem ser armazenados no mesmo shard, por isso devemos passar o query parameter routing**.
+16. Documents should be in the same index - **Join Limitation**
+17. Parents and child (and grandparents as so) should be in the same shard. Be careful with ?routing query parameter - **Join Limitation**
+18. Must be only one join_field per index. A join_field can have as many relations as you want. New relations can be added after creating the index - **Join Limitation**
+19. Documents can only have one parent, but multiple children is possible. E.g one employee can only have one department - **Join Limitation**
+20. Each level of document relations adds an overhead to queries - **Join Field Performance Considerations**
+21. More child documents makes has_child slower - **Join Field Performance Considerations**
+22. More parent documents makes has_parent slower - **Join Field Performance Considerations**
+23. Scenario where you should use join_field and relations: A one to many relationship between two document types where one type has many more documents than the other - **Join Field Performance Considerations**
+24. Denormalize data instead of mapping document relationships. This is almost always the best approach. - **Join Field Performance Considerations**
+
 
 
 
