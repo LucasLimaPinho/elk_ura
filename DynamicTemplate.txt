@@ -225,6 +225,108 @@ POST /test_index/_doc
   "text_product_id_keyword": "ABC-123"
 }
 
+# Dynamic Templates
+
+PUT /dynamic_template_test
+{
+  "mappings": {
+    "dynamic_templates": [
+      {
+        "integers": {
+          "match_mapping_type": "long",
+          "mapping": {
+            "type": "integer"
+          }
+        }
+      }
+    ]
+  }
+}
+
+# By default, isso seria mapeado como um LONG field.
+
+# Com dynamic template, veremos que será mapeado para um integer.
+
+POST /dynamic_template_test/_doc
+{
+  "in_stock": 123
+}
+
+GET /dynamic_template_test/_doc/A0PNI3UBELyn9RdFQ_Bh
+
+GET /dynamic_template_test
+
+GET /dynamic_template_test/_mapping
+
+# Exemplo para dynamic template de um tipo text - por exemplo mudar o parâmetro ignore above
+
+PUT /dynamic_template_text
+{
+  "mappings": {
+    "dynamic_templates" : [
+      {
+      "strings": {
+        "match_mapping_type": "string",
+        "mapping": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 512
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+
+POST /dynamic_template_text/_doc
+{
+  "name": "Lucas Lima Reis de Pinho"
+}
+
+GET /dynamic_template_text/_mapping
+
+# Dynamic templactes with match and unmatch to get differentes dynamic mapping
+# according to the wildcard
+
+PUT /test_index
+{
+  "mappings": {
+    "dynamic_templates": [
+    {
+      "strings_only_text": {
+        "match_mapping_type": "string",
+        "match": "text_*",
+        "unmatch": "*_keyword",
+        "mapping": {
+          "type": "text"
+        }
+      }
+    },
+    {
+        "strings_only_keywords": {
+          "match_mapping_type": "string",
+          "match": "*_keyword",
+          "mapping": {
+            "type": "keyword"
+          }
+        }
+      }
+    ]
+  }
+}
+
+# text_product_description ----> text (dynamic mapping configuration)
+# text_product_id_keyword -----> keyword (dynamic mapping configuration)
+POST /test_index/_doc
+{
+  "text_product_description": "A description",
+  "text_product_id_keyword": "ABC-123"
+}
+
 GET /test_index/_mapping
 
 
@@ -256,3 +358,38 @@ POST /test_index_pattern_configuration/_doc
 }
 
 GET /test_index_pattern_configuration/_mapping
+
+PUT /test_index_full_name
+{
+  "mappings": {
+    "dynamic_templates": [
+      {
+        "copy_to_full_name": {
+          "match_mapping_type": "string",
+          "path_match": "employer.name.*",
+          "mapping": {
+            "type": "text",
+            "copy_to": "full_name"
+          }
+        }
+        
+      }
+    ]
+  }
+}
+
+POST /test_index_full_name/_doc
+{
+  "employer":{
+    "name": {
+      
+      "first_name": "Lucas",
+      "middle_name": "Lima",
+      "last_name": "Pinho"
+      
+    }
+  }
+
+}
+
+GET /test_index_full_name/_mapping
