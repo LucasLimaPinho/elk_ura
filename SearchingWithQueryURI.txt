@@ -5,5 +5,8 @@ GET /products/_search?q=?
 
 GET /products/_search?q=name:nori
 
+#Kibana tool permite AND. Caso fosse com curl, substituir por %20
+GET /products/_search?q=tags:Meat AND name:Tuna
+
 
 
