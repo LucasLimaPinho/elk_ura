@@ -10,7 +10,8 @@ GET /orders/_search
     "status_terms": {
       "terms": {
         "field": "status.keyword",
-        "missing": "N/A"
+        "missing": "N/A",
+        "min_doc_count": 0
       }
     }
   }
