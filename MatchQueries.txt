@@ -52,3 +52,21 @@ GET /recipes/_search
     }
   }
 }
+
+GET /recipes/_search 
+{
+  "query": {
+    "match_phrase": {
+      "title": "Spaghetti Puttanesca"
+    }
+  }
+}
+
+GET /recipes/_search 
+{
+  "query": {
+    "match_phrase": {
+      "title": "Puttanesca Spaghetti"
+    }
+  }
+}
