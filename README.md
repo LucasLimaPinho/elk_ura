@@ -32,6 +32,11 @@ https://www.udemy.com/course/elasticsearch-complete-guide
          * Inverse Document Frequency (IDF) -> How often the term appears within the index? (i.e across all documents). If the term appears in many documents, it has a lower            relevance score
          * Field length norm -> How long is the field? Short fiels has more weight than a long field.
          * BM25 handles better stop words.
+7. In the filter context (Do documento match the query?) , no relevance scores are calculated. In the Query Context, it looks for how How Well do Documents Match?
+8. Filter context are common in dates, status, etc.
+9. Match Queries passam pelo mesmo processo de standard analyzer que os documentos passam no momento de integração aos data structures de Inverted Index; Por isso conseguimos   encontrar full-text matches com letra maiúscula;
+10. Term Queries **não** passam pelo mesmo processo de standard analyzer que os documentos passam no momento de integração aos data structures de Inverted Index; Por isso não   conseguimos encontrar exact matchs com letra maiúscula;
+11. **O que encontramos no object _source não é o que o Elasticsearch de fato está procurando. Ele procura o que está dentro das estruturas (BKD Trees ou Inverted Index) do Apache Lucene. Para o caso de text fields, o que está no data structure Inverted Index do Apache Lucene são os fields que passam para pelo processo de Analyzer onde por default sofrem o filtro de lowercase no processo de tokenização**
 
 
 
