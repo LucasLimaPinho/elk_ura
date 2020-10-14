@@ -46,6 +46,46 @@ PUT /dynamic_template_text
   "mappings": {
     "dynamic_templates" : [
       {
+# Dynamic Templates
+
+PUT /dynamic_template_test
+{
+  "mappings": {
+    "dynamic_templates": [
+      {
+        "integers": {
+          "match_mapping_type": "long",
+          "mapping": {
+            "type": "integer"
+          }
+        }
+      }
+    ]
+  }
+}
+
+# By default, isso seria mapeado como um LONG field.
+
+# Com dynamic template, veremos que será mapeado para um integer.
+
+POST /dynamic_template_test/_doc
+{
+  "in_stock": 123
+}
+
+GET /dynamic_template_test/_doc/A0PNI3UBELyn9RdFQ_Bh
+
+GET /dynamic_template_test
+
+GET /dynamic_template_test/_mapping
+
+# Exemplo para dynamic template de um tipo text - por exemplo mudar o parâmetro ignore above
+
+PUT /dynamic_template_text
+{
+  "mappings": {
+    "dynamic_templates" : [
+      {
       "strings": {
         "match_mapping_type": "string",
         "mapping": {
@@ -69,3 +109,43 @@ POST /dynamic_template_text/_doc
 }
 
 GET /dynamic_template_text/_mapping
+
+# Dynamic templactes with match and unmatch to get differentes dynamic mapping
+# according to the wildcard
+
+PUT /test_index
+{
+  "mappings": {
+    "dynamic_templates": [
+    {
+      "strings_only_text": {
+        "match_mapping_type": "string",
+        "match": "text_*",
+        "unmatch": "*_keyword",
+        "mapping": {
+          "type": "text"
+        }
+      }
+    },
+    {
+        "strings_only_keywords": {
+          "match_mapping_type": "string",
+          "match": "*_keyword",
+          "mapping": {
+            "type": "keyword"
+          }
+        }
+      }
+    ]
+  }
+}
+
+# text_product_description ----> text (dynamic mapping configuration)
+# text_product_id_keyword -----> keyword (dynamic mapping configuration)
+POST /test_index/_doc
+{
+  "text_product_description": "A description",
+  "text_product_id_keyword": "ABC-123"
+}
+
+GET /test_index/_mapping
