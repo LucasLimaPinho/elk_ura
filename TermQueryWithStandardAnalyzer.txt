@@ -1,5 +1,8 @@
 
-# Hits = 5
+# Hits = 5 -----> O Match Query sofre o mesmo processo de STANDARD ANALYZER que o documento no processo de entrar no data structure de Inverted Index.
+# Por isso temos 5 HITS para o Match Query com letra maiúscula - Lobster.
+# O Term Query não irá passar pelo processo de standard analyzer que passa o documento ao ser integrado no data structure de Inverted Index.
+
 GET /products/_search
 {
   "query": {
