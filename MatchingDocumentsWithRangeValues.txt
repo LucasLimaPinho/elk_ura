@@ -1,0 +1,14 @@
+# gte --> greater than or equal to
+# lte --> lesser than or equal to
+
+GET /products/_search
+{
+  "query": {
+    "range": {
+      "in_stock": {
+        "gte": 1,
+        "lte": 25
+      }
+    }
+  }
+}
