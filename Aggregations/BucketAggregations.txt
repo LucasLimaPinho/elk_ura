@@ -1,0 +1,16 @@
+# Bucket Aggregation - creates buckets que são basicamente conjuntos de documentos.
+# Diferentemente das Metrics Aggregations que calculam números (min, max, avg, sum), as buckets aggregations apenas irão juntar documentos em conjuntos.
+
+# TERMS é uma bucket aggregation.
+
+GET /orders/_search
+{
+  "size": 0,
+  "aggs": {
+    "status_terms": {
+      "terms": {
+        "field": "status.keyword"
+      }
+    }
+  }
+}
