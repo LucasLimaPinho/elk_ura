@@ -1,0 +1,10 @@
+GET products_search 
+{
+  query {
+    terms {
+      
+      tags.keyword [Soup,Cake]
+      
+    }
+  }
+}
