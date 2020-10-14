@@ -1,0 +1,38 @@
+# Control the response size
+
+GET /recipes/_search?size=2
+{
+  "_source": false,
+  "query": {
+    "match": {
+      "title": "pasta"
+    }
+  }
+}
+
+# Control the response size
+
+# Via URI (query parameters)
+
+GET /recipes/_search?size=2
+{
+  "_source": false,
+  "query": {
+    "match": {
+      "title": "pasta"
+    }
+  }
+}
+
+# Via Body (Query DSL)
+
+GET /recipes/_search
+{
+  "_source": false,
+  "size": 2, 
+  "query": {
+    "match": {
+      "title": "pasta"
+    }
+  }
+}

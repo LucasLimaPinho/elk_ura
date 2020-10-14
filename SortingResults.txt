@@ -1,0 +1,16 @@
+
+GET /recipes/_search
+{
+  "_source": ["preparation_time_minutes", "created"],
+  "query": {
+    "match_all": {}
+  },
+  "sort": [
+    {
+      "created": "desc"
+    },
+    {
+      "preparation_time_minutes": "asc"
+    }
+  ]
+}

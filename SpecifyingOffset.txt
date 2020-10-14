@@ -1,0 +1,19 @@
+#Specifying offset - FROM parameter
+
+#size -> equivalente a LIMIT em SQL
+#from -> equivalente a OFFSET em SQL
+
+GET /recipes/_search
+{
+  "_source": false,
+  "size": 2, 
+  "from": 5, 
+  "query": {
+    "match": {
+      "title": "pasta"
+    }
+  }
+}
+
+
+

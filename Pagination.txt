@@ -1,0 +1,11 @@
+#PAGINATION
+
+# parameter SIZE
+# parameter FROM
+
+# total_pages = ceil(total_hits / page_size)
+
+# To go to one page for another, we need to specify the from parameter.
+
+# from = (page_size * (page_number - 1))
+
