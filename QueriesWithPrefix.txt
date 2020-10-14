@@ -1,0 +1,8 @@
+GET /products/_search 
+{
+  "query": {
+    "prefix": {
+      "tags.keyword": "Vege"
+    }
+  }
+}
