@@ -1,0 +1,33 @@
+
+# Hits = 5
+GET /products/_search
+{
+  "query": {
+    "match": {
+      "name": "Lobster"
+    }
+  }
+}
+
+# Hits = 0 -----------> Isso é porque utiliza o STANDARD ANALYZER que aplica o filter de lowercase para o tokenizer.
+
+# Somente irá encontrar o exact match para lowercase devido standard analyzer.
+
+GET /products/_search
+{
+  "query": {
+    "term": {
+      "name": "Lobster"
+    }
+  }
+}
+
+# Hits = 5
+GET /products/_search
+{
+  "query": {
+    "term": {
+      "name": "lobster"
+    }
+  }
+}
