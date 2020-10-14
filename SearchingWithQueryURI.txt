@@ -1,0 +1,9 @@
+# Mostra todos os resultados
+GET /products/_search?q=?
+
+#Full text search para name:nori
+
+GET /products/_search?q=name:nori
+
+
+
