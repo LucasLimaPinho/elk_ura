@@ -1,0 +1,54 @@
+GET /department/_search
+{
+  "query": {
+    "has_child": {
+      "type": "employee",
+      "inner_hits": {}, 
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "range": {
+                "age": {
+                  "gte": 50
+                }
+              }
+            }
+          ],
+          "should": [
+            {
+              "term": {
+                "gender.keyword": {
+                  "value": "M"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+
+GET /department/_search
+{
+  "query": {
+    "has_parent": {
+      "parent_type": "department",
+      "inner_hits": {},
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "term": {
+                "name.keyword": {
+                  "value": "Development"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

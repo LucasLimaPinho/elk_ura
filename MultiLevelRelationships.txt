@@ -1,0 +1,110 @@
+PUT /company
+{
+  "mappings": {
+    "properties": {
+      "join_field":{
+        "type": "join",
+        "relations": {
+          "company": ["department" , "supplier"],
+          "department": "employee"
+        }
+      }
+    }
+  }
+}
+
+# Criando uma company
+
+PUT /company/_doc/1
+{
+  "name": "My Company Inc.",
+  "join_field": {
+    "name": "company"
+  }
+}
+
+# Criando um departamento da empresa com child-parent relationship
+
+PUT /company/_doc/2?routing=1
+{
+  "name": "Development",
+  "join_field": {
+    "name": "department",
+    "parent": 1
+  }
+}
+
+# Criando um employee do departamento Development
+# O routing tem que ser do grandparent.
+# Grandparent, parent & child should be in the same shard.
+
+
+PUT /company/_doc/3?routing=1
+{
+  "name": "Lucas Pinho",
+  "age": 29,
+  "gender": "M",
+  "join_field": {
+    "name": "employee",
+    "parent":2
+  }
+}
+
+# Criando um supplier da company
+
+PUT /company/_doc/4?routing=1
+{
+  "name": "Intel Processadores",
+  "join_field": {
+    "name": "supplier",
+    "parent": 1
+  }
+}
+
+PUT /company/_doc/4
+{
+  "name": "Another Company, Inc.",
+  "join_field": "company"
+}
+
+PUT /company/_doc/5?routing=4
+{
+  "name": "Marketing",
+  "join_field": {
+    "name": "department",
+    "parent": 4
+  }
+}
+
+PUT /company/_doc/6?routing=4
+{
+  "name": "John Doe",
+  "join_field": {
+    "name": "employee",
+    "parent": 5
+  }
+}
+
+# Exemplo de query que ache uma Company que possue um funcionario John Doe no departamento de Marketing
+
+GET /company/_search 
+{
+  "query": {
+    "has_child": {
+      "type": "department",
+      "query": {
+        "has_child": {
+          "type": "employee",
+          "query": {
+            "term": {
+              "name.keyword": {
+                "value": "John Doe"
+              }
+            }
+          }
+        }
+      }
+    }
+    
+  }
+}
