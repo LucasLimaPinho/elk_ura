@@ -43,14 +43,22 @@ GET /orders/_search
         "ranges": [
           {
             "from": "2016-01-01", 
-            "to": "2016-01-01||+6M" 
+            "to": "2016-01-01||+6M",
+            "key": "First Half"
           },
           {
             "from": "2016-01-01||+6M",
-            "to": "2016-01-01||+1y"
+            "to": "2016-01-01||+1y",
+            "key": "Second Half"
           }
-
         ]
+      },
+      "aggs": {
+        "stats_per_half": {
+          "stats": {
+            "field": "total_amount"
+          }
+        }
       }
     }
   }
