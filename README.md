@@ -62,6 +62,7 @@ https://www.udemy.com/course/elasticsearch-complete-guide
 6. doc_count_error_upper_bound -> esta key representa o máximo número de contagem de um termo que não foi parte do resultado final (uma métrica de quanto a contagem de documentos teve acurácia). Ele provê uma margem de erro. Na maioria dos cenários, a inacurácia do document count não será um problema mantendo o valor default de 10 para size como key do objeto "terms";
 7. Podemos realizar uma restrição com key "query" antes de realizar a construção dos buckets.
 8. Nested aggregations permite construir stats_aggregations (Metrics) para cada bucket criado pela BucketAggregation.
+9. BucketAggregations may contain sub-aggregations. MetricsAggreation cannot.
 
 
 
