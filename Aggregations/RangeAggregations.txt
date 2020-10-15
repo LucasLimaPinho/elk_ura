@@ -1,0 +1,53 @@
+# RANGE AGGREGATIONS
+
+GET /orders/_search
+{
+  "size": 0,
+  "aggs": {
+    "amount_distribution": {
+      "range": {
+        "field": "total_amount",
+        "ranges": [
+          {
+            "to": 50
+          },
+          {
+            "from": 50,
+            "to": 100
+          },
+          {
+            "from": 100
+          }
+        ]
+      }
+    }
+  }
+}
+
+# RANGE AGGREGATIONS FOR DATES
+# Um bucket para primeiro semestre de 2016
+# Outro bucket para segundo semestre de 2016 utilizando || para date_math
+
+
+GET /orders/_search
+{
+  "size": 0,
+  "aggs": {
+    "purchase_ranges": {
+      "date_range": {
+        "field": "purchased_at",
+        "ranges": [
+          {
+            "from": "2016-01-01", 
+            "to": "2016-01-01||+6M" 
+          },
+          {
+            "from": "2016-01-01||+6M",
+            "to": "2016-01-01||+1y"
+          }
+
+        ]
+      }
+    }
+  }
+}
