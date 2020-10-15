@@ -27,6 +27,8 @@ GET /orders/_search
 # RANGE AGGREGATIONS FOR DATES
 # Um bucket para primeiro semestre de 2016
 # Outro bucket para segundo semestre de 2016 utilizando || para date_math
+# from value is included
+# to value is excluded
 
 
 GET /orders/_search
