@@ -1,9 +1,13 @@
 # References
 
 https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
+
 https://www.elastic.co/guide/en/elasticsearch/reference/7.9/install-elasticsearch.html
+
 https://www.elastic.co/guide/en/kibana/current/install.html
+
 https://www.udemy.com/course/elasticsearch-complete-guide
+
 
 # Mapping Recomendations
 
