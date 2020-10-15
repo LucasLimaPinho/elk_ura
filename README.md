@@ -51,6 +51,7 @@ https://www.udemy.com/course/elasticsearch-complete-guide
 23. Scenario where you should use join_field and relations: A one to many relationship between two document types where one type has many more documents than the other - **Join Field Performance Considerations**
 24. Denormalize data instead of mapping document relationships. This is almost always the best approach. - **Join Field Performance Considerations**
 25. Filters save computation time when we don't need to calculate relevance scores.
+26. Fuzzy Queries are not analyzed.
 
 # Aggregations
 
