@@ -34,3 +34,30 @@ GET /proximity/_search
     }
   }
 }
+
+GET /proximity/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "title": {
+              "query": "spicy sauce"
+            }
+          }
+        }
+      ],
+      "should": [
+        {
+          "match_phrase": {
+            "title": {
+              "query": "spicy sauce",
+              "slop": 5
+            }
+          }
+        }
+      ]
+    }
+  }
+}
