@@ -1,0 +1,22 @@
+GET /products/_search 
+{
+  "query": {
+    "match": {
+      "name": {
+        "query": "lobster"
+      }
+    }
+  }
+}
+
+GET /products/_search 
+{
+  "query": {
+    "match": {
+      "name": {
+        "query": "l0bster",
+        "fuzziness": "auto"
+      }
+    }
+  }
+}
