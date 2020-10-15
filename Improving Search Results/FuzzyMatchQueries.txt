@@ -57,3 +57,24 @@ GET /products/_search
     }
   }
 }
+
+# Desabilitando fuzzy_transpositions. QUery não retorna nada
+
+GET /products/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "name": {
+              "query": "lvie",
+              "fuzziness": 1,
+              "fuzzy_transpositions": false
+            }
+          }
+        }
+      ]
+    }
+  }
+}
