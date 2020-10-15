@@ -1,0 +1,31 @@
+#Missing Fields Aggregation
+
+PUT /orders/_doc/1001
+{
+  "total_amount": 100
+}
+
+PUT /orders/_doc/1002
+{
+  "total_amount": 100,
+  "status": null
+}
+
+GET /orders/_search
+{
+  "size": 0,
+  "aggs": {
+    "orders_without_status": {
+      "missing": {
+        "field": "status.keyword"
+      },
+      "aggs": {
+        "missing_sum": {
+          "sum": {
+            "field": "total_amount"
+          }
+        }
+      }
+    }
+  }
+}
