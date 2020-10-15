@@ -1,0 +1,89 @@
+#HISTOGRAMS
+
+# Histograms dynamically builds buckets from numeric fields.
+# Os valores são arrendodados para baixo para o bucket mais próximo
+# no nosso caso, o valor máximo de total_amout é 281 e o último bucket com um único documento associado a ele é 275
+
+GET /orders/_search 
+{
+  "size": 0,
+  "aggs":{
+    "distribution":{
+      "histogram": {
+        "field": "total_amount",
+        "interval": 25,
+        "min_doc_count": 1
+      }
+    }
+  }
+}
+
+# Removendo alguns buckets do "histogram" estabelecendo uma query anteriormente somente para documentos com total_amout >= 100
+
+# Mudança de contexto sobre o qual o histogram_aggregation irá atuar.
+
+
+GET /orders/_search
+{
+  "size": 0,
+  "query": {
+    "range": {
+      "total_amount": {
+        "gte": 100
+      }
+    }
+  },
+  "aggs": {
+    "distribution": {
+      "histogram": {
+        "field": "total_amount",
+        "interval": 25,
+        "min_doc_count": 1,
+        "extended_bounds": {
+          "min": 0,
+          "max": 500
+        }
+      }
+    }
+  }
+}
+
+GET /orders/_search
+{
+  "size": 0,
+  "query": {
+    "range": {
+      "total_amount": {
+        "gte": 100
+      }
+    }
+  },
+  "aggs": {
+    "distribution": {
+      "histogram": {
+        "field": "total_amount",
+        "interval": 25,
+        "min_doc_count": 0,
+        "extended_bounds": {
+          "min": 0,
+          "max": 500
+        }
+      }
+    }
+  }
+}
+
+# Um bucket para cada mês com date_histogram 
+
+GET /orders/_search
+{
+  "size": 0,
+  "aggs": {
+    "orders_over_time": {
+      "date_histogram": {
+        "field": "purchased_at",
+        "calendar_interval": "month"
+      }
+    }
+  }
+}
