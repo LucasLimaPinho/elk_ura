@@ -1,0 +1,33 @@
+# Definindo regras para quais buckets os documentos devem ser adicionados
+# Vamos por exemplo determinar um bucket para Pasta recipes and other for Spaghetti recipes
+# neste caso: "pasta" é um bucket, "spaghetti" é outro bucket
+
+GET /recipes/_search
+{
+  "size": 0,
+  "aggs": {
+    "my_filter": {
+      "filters": {
+        "filters": {
+          "pasta":{
+            "match":{
+              "title": "pasta"
+            }
+          },
+          "spaghetti": {
+            "match": {
+              "title": "spaghetti"
+            }
+          }
+        }
+      },
+      "aggs": {
+        "avg_rating": {
+          "avg": {
+            "field": "ratings"
+          }
+        }
+      }
+    }
+  }
+}
