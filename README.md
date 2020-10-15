@@ -63,6 +63,7 @@ https://www.udemy.com/course/elasticsearch-complete-guide
 7. Podemos realizar uma restrição com key "query" antes de realizar a construção dos buckets.
 8. Nested aggregations permite construir stats_aggregations (Metrics) para cada bucket criado pela BucketAggregation.
 9. BucketAggregations may contain sub-aggregations. MetricsAggreation cannot.
+10. Para date_range aggregations a regra é -> from dates are included, to dates are exluded -> (from, to]
 
 
 
