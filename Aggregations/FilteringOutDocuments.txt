@@ -1,0 +1,25 @@
+# A agregação "avg_amount" apenas ocorre no contexto da primeira agregação "low_value" de forma que é observável que o average value é próximo de 32 -> sendo todos os valores menores que 50.
+# Ou seja, a primeira agregação "low_value" filtered out documents com valor de total_amount inferior a 50.
+
+GET /orders/_search
+{
+  "size": 0,
+  "aggs": {
+    "low_value": {
+      "filter": {
+        "range": {
+          "total_amount": {
+            "lt": 50
+          }
+        }
+      },
+      "aggs": {
+        "avg_amount": {
+          "avg": {
+            "field": "total_amount"
+          }
+        }
+      }
+    }
+  }
+}
