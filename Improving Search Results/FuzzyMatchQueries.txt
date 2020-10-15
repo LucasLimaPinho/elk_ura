@@ -36,3 +36,24 @@ GET /products/_search
     }
   }
 }
+
+# TRANSPOSITIONS : AB -> BA
+# É contado como apenas um edit para termos de fuzzyness
+
+GET /products/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "name": {
+              "query": "lvie",
+              "fuzziness": 1
+            }
+          }
+        }
+      ]
+    }
+  }
+}
