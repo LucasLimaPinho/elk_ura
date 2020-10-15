@@ -1,0 +1,28 @@
+# GLOBAL AGGREGATIONS
+# Global aggregation is not influenced by the search query.
+# Faz a agregação em cima 1000 documentos e não dos 489 documentos retornados pela query com total_amout maior que 100
+
+GET /orders/_search
+{
+  "query": {
+    "range": {
+      "total_amount": {
+        "gte": 100
+      }
+    }
+  },
+  "size": 0,
+  "aggs": {
+    "all_orders":{
+      "global": {},
+      "aggs": {
+        "stats_amount":{
+          "stats": {
+            "field": "total_amount"
+          }
+        }
+        
+      }
+    }
+  }
+}
