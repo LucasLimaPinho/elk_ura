@@ -9,12 +9,28 @@ GET /products/_search
   }
 }
 
+# The maximum edit distance for automatic fuzzyness is 2.
+# É por isso que temos resposta para a query com l0bs7er.
+
 GET /products/_search 
 {
   "query": {
     "match": {
       "name": {
-        "query": "l0bster",
+        "query": "l0bs7er",
+        "fuzziness": "auto"
+      }
+    }
+  }
+}
+
+# Mas não temos resposta para a query com l0bs73r
+GET /products/_search 
+{
+  "query": {
+    "match": {
+      "name": {
+        "query": "l0bs73r",
         "fuzziness": "auto"
       }
     }
